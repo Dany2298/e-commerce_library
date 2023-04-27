@@ -218,6 +218,7 @@ Highlights
 
 .books {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .book {
@@ -268,3 +269,7 @@ Highlights
 .book__ratings {
   margin-left: 8px;
 }
+
+/* .books__recent {
+  flex-wrap: wrap;
+} */
