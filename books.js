@@ -6,7 +6,9 @@ function renderBooks(filter) {
   if (filter === "LOW_TO_HIGH") {
     books.sort((a, b) => a.originalPrice - b.originalPrice);
   } else if (filter === "HIGH_TO_LOW") {
-    (a, b) => b.originalPrice - a.originalPrice;
+    books.sort((a, b) => b.originalPrice - a.originalPrice);
+  } else if (filter === "RATING") {
+    books.sort((a, b) => b.rating - a.rating);
   }
 
   const booksHtml = books
@@ -21,11 +23,7 @@ function renderBooks(filter) {
     </figure>
     <div class="book__title">${book.title}</div>
     <div class="book__ratings">
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star-half-alt"></i>
+    ${ratingHtml(book.rating)}        
     </div>
     <div class="book__price">
       <span>$${book.originalPrice.toFixed(2)}</span> 
@@ -36,8 +34,20 @@ function renderBooks(filter) {
 
   booksWrapper.innerHTML = booksHtml;
 }
-// booksWrapper.innerHTML = ;
 
+function ratingHtml(rating) {
+  let ratingHtml = "";
+
+  for (let i = 0; i < Math.floor(rating); i++) {
+    //looping over rating
+    ratingHtml += '<i class="fas fa-star"></i>'; //adding 4 stars
+  }
+  if (!Number.isInteger(rating)) {
+    //if the rating is not an integer
+    ratingHtml += '<i class="fas fa-star-half-alt"></i>'; //add half star
+  }
+  return ratingHtml;
+}
 function filterBooks(event) {
   //passing the event as a parameter through the onChange
   //targets the low to high filter
@@ -122,7 +132,7 @@ function getBooks() {
       url: "assets/book-6.jpeg",
       originalPrice: 35,
       salePrice: null,
-      rating: 4,
+      rating: 2,
     },
     {
       id: 10,
