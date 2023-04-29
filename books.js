@@ -1,3 +1,44 @@
+function renderBooks() {
+  const booksWrapper = document.querySelector(" .books");
+
+  const books = getBooks();
+
+  const booksHtml = books
+    .map((book) => {
+      return `<div class="book">
+    <figure class="book__img--wrapper">
+      <img
+        class="book__img"
+        src= "${book.url}"
+        alt="book"
+      />
+    </figure>
+    <div class="book__title">${book.title}</div>
+    <div class="book__ratings">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+    </div>
+    <div class="book__price">
+      <span class="book__price--normal">$${book.originalPrice}</span> $${book.salePrice}
+    </div>
+  </div>`;
+    })
+    .join("");
+
+  console.log(booksHtml);
+
+  booksWrapper.innerHTML = booksHtml;
+
+  // booksWrapper.innerHTML = ;
+}
+
+setTimeout(() => {
+  renderBooks(); //js loads before the dom element does. in order, to fix that we put it in a set timeout.
+});
+
 // FAKE DATA
 function getBooks() {
   return [
